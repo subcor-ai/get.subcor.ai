@@ -22,6 +22,29 @@ installs `subcor` to `~/.subcor/bin` (no sudo required).
 
 Windows is not currently supported.
 
+### Manual installation
+
+Each release is a single self-contained executable — if you'd rather not run the
+installer, download it and drop it anywhere on your `PATH`. Grab your platform's
+asset from the [latest release](https://github.com/subcor-ai/get.subcor.ai/releases/latest):
+
+```sh
+curl -LO https://github.com/subcor-ai/get.subcor.ai/releases/latest/download/subcor_darwin_arm64.tar.gz
+tar -xzf subcor_darwin_arm64.tar.gz
+mv subcor /usr/local/bin/
+subcor --version
+```
+
+Optionally, verify the download against the published checksums first:
+
+```sh
+curl -LO https://github.com/subcor-ai/get.subcor.ai/releases/latest/download/checksums.txt
+shasum -a 256 -c checksums.txt --ignore-missing
+```
+
+Asset names are `subcor_<os>_<arch>.tar.gz` (`os`: `darwin`, `linux`; `arch`:
+`amd64`, `arm64`). On Linux, use `sha256sum -c` in place of `shasum -a 256 -c`.
+
 ### Options
 
 | Environment variable    | Effect                                                        |
