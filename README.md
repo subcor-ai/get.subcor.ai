@@ -1,8 +1,8 @@
-# get.subcor.ai
+# Subcor CLI Installer (get.subcor.ai)
 
-Public distribution point for the [Subcor](https://subcor.ai) command-line
-interface. This repository hosts the installer and the released CLI binaries —
-**no application source lives here.**
+This is the official distribution channel for the Subcor CLI binaries. This
+repository hosts both the Subcor CLI installer script and the released CLI
+binaries.
 
 ## Install
 
@@ -11,10 +11,16 @@ curl -fsSL https://get.subcor.ai/install.sh | sh
 ```
 
 This downloads the right binary for your platform, verifies its checksum, and
-installs `subcor` to `~/.subcor/bin` (no sudo). macOS and Linux on amd64/arm64
-are supported.
+installs `subcor` to `~/.subcor/bin` (no sudo required).
 
-Signing in requires an invite; installation does not.
+### Supported Platforms
+
+| Platform | Architectures    |
+| -------- | ---------------- |
+| Linux    | `amd64`, `arm64` |
+| macOS    | `amd64`, `arm64` |
+
+Windows is not currently supported.
 
 ### Options
 

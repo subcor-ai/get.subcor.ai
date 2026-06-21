@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Install the Subcor CLI</title>
     <meta name="description" content="Install the Subcor command-line interface." />
+    <!-- Theme-aware favicon mark, reused from the console: light-scheme mark on
+         light backgrounds, dark-scheme mark on dark. -->
+    <link rel="icon" href="/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
     <style>
       :root {
         color-scheme: dark;
@@ -28,6 +32,17 @@
       }
       main { width: 100%; max-width: 640px; padding: 2.5rem 1.5rem; }
       h1 { font-size: 1.75rem; margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+      /* The subcor login banner, reproduced from the CLI (banner.go) in true
+         RGB — violet pulse gradient, teal axis, wordmark in the page fg. */
+      .banner {
+        font: 16px/1.18 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        color: var(--fg);
+        width: fit-content;
+        max-width: 100%;
+        margin: 0 auto 4rem;
+        overflow-x: auto;
+        white-space: pre;
+      }
       p.lead { color: var(--muted); margin: 0 0 2rem; }
       .cmd {
         display: flex;
@@ -62,6 +77,11 @@
   </head>
   <body>
     <main>
+      <pre class="banner" aria-hidden="true">            <span style="color:rgb(205,180,255)">***</span>                   __
+          <span style="color:rgb(178,150,233)">**</span>   <span style="color:rgb(178,150,233)">**</span>     _______  __/ /_  _________  _____
+      <span style="color:rgb(150,120,210)">.***</span>       <span style="color:rgb(150,120,210)">**.</span> / ___/ / / / __ \/ ___/ __ \/ ___/
+ <span style="color:rgb(123,90,188)">..***</span>              (__  ) /_/ / /_/ / /__/ /_/ / /
+<span style="color:rgb(66,220,205)">___________________</span>/____/\__,_/_.___/\___/\____/_/<span style="color:rgb(66,220,205)">______</span></pre>
       <h1>Subcor CLI</h1>
       <p class="lead">Author and validate system models, and manage systems, releases, instances, and collectors — from your terminal.</p>
 
