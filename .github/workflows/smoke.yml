@@ -1,0 +1,31 @@
+name: install smoke test
+
+# Runs the committed install.sh against the live latest release on macOS and
+# Linux, then checks `subcor --version`.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - install.sh
+      - .github/workflows/smoke.yml
+  schedule:
+    - cron: "0 14 * * 1" # Mondays, 14:00 UTC
+
+jobs:
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install via committed script
+        run: sh ./install.sh
+      - name: Verify subcor runs and reports a version
+        run: |
+          export PATH="$HOME/.subcor/bin:$PATH"
+          subcor --version
+          # Version line must be non-empty and not the dev fallback.
+          subcor --version | grep -vq '(devel)'
