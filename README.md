@@ -4,7 +4,7 @@ This is the official distribution channel for the Subcor CLI binaries. This
 repository hosts both the Subcor CLI installer script and the released CLI
 binaries.
 
-## Install
+## Install using Installer (recommended)
 
 ```sh
 curl -fsSL https://get.subcor.ai/install.sh | sh
@@ -22,11 +22,30 @@ installs `subcor` to `~/.subcor/bin` (no sudo required).
 
 Windows is not currently supported.
 
-### Manual installation
+### Options
+
+| Environment variable    | Effect                                                        |
+| ----------------------- | ------------------------------------------------------------- |
+| `SUBCOR_VERSION`        | Install an exact version (e.g. `SUBCOR_VERSION=1.4.0`)         |
+| `SUBCOR_INSTALL`        | Install prefix (default `~/.subcor`; binary in `<prefix>/bin`) |
+| `SUBCOR_NO_MODIFY_PATH` | Skip editing your shell profile                               |
+
+### Uninstall
+
+```sh
+rm -rf ~/.subcor
+```
+
+…and remove the `# subcor (managed)` block from your shell profile
+(`~/.zshrc`, `~/.bashrc`/`~/.bash_profile`, or `~/.config/fish/config.fish`).
+
+## Manual installation
 
 Each release is a single self-contained executable — if you'd rather not run the
 installer, download it and drop it anywhere on your `PATH`. Grab your platform's
 asset from the [latest release](https://github.com/subcor-ai/get.subcor.ai/releases/latest):
+
+Example for macOS `arm64`:
 
 ```sh
 curl -LO https://github.com/subcor-ai/get.subcor.ai/releases/latest/download/subcor_darwin_arm64.tar.gz
@@ -44,23 +63,6 @@ shasum -a 256 -c checksums.txt --ignore-missing
 
 Asset names are `subcor_<os>_<arch>.tar.gz` (`os`: `darwin`, `linux`; `arch`:
 `amd64`, `arm64`). On Linux, use `sha256sum -c` in place of `shasum -a 256 -c`.
-
-### Options
-
-| Environment variable    | Effect                                                        |
-| ----------------------- | ------------------------------------------------------------- |
-| `SUBCOR_VERSION`        | Install an exact version (e.g. `SUBCOR_VERSION=1.4.0`)         |
-| `SUBCOR_INSTALL`        | Install prefix (default `~/.subcor`; binary in `<prefix>/bin`) |
-| `SUBCOR_NO_MODIFY_PATH` | Skip editing your shell profile                               |
-
-### Uninstall
-
-```sh
-rm -rf ~/.subcor
-```
-
-…and remove the `# subcor (managed)` block from your shell profile
-(`~/.zshrc`, `~/.bashrc`/`~/.bash_profile`, or `~/.config/fish/config.fish`).
 
 ## What's here
 
