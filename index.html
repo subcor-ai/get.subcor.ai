@@ -73,6 +73,31 @@
       .meta { color: var(--muted); font-size: 0.8rem; margin-top: 2.5rem; }
       .meta a { color: var(--fg); }
       code.inline { background: var(--card); border: 1px solid var(--border); border-radius: 5px; padding: 0.1rem 0.35rem; font-size: 0.85em; }
+      /* Install-method tabs: pure CSS — hidden radio inputs + :checked sibling
+         selectors switch panes. No framework, no build step. */
+      .tabin { position: absolute; opacity: 0; pointer-events: none; }
+      .tabs > label {
+        display: inline-block;
+        padding: 0.4rem 0.9rem;
+        margin-right: 0.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        user-select: none;
+      }
+      .tabs > label:hover { color: var(--fg); }
+      #m-curl:checked ~ label[for="m-curl"],
+      #m-brew:checked ~ label[for="m-brew"] {
+        color: var(--bg);
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .pane { display: none; }
+      #m-curl:checked ~ .pane[data-pane="curl"],
+      #m-brew:checked ~ .pane[data-pane="brew"] { display: block; }
     </style>
   </head>
   <body>
@@ -85,15 +110,34 @@
       <h1>Subcor CLI</h1>
       <p class="lead">Author and validate system models, and manage systems, releases, instances, and collectors — from your terminal.</p>
 
-      <div class="cmd">
-        <span class="prompt">$</span>
-        <code id="cmd">curl -fsSL https://get.subcor.ai/install.sh | sh</code>
-        <button id="copy" type="button">Copy</button>
-      </div>
+      <div class="tabs">
+        <input type="radio" name="m" id="m-curl" class="tabin" checked />
+        <label for="m-curl">Installer</label>
+        <input type="radio" name="m" id="m-brew" class="tabin" />
+        <label for="m-brew">Homebrew</label>
 
-      <p class="note">
-        Installs to <code class="inline">~/.subcor/bin</code> on macOS and Linux (amd64/arm64) — no sudo.
-      </p>
+        <div class="pane" data-pane="curl">
+          <div class="cmd">
+            <span class="prompt">$</span>
+            <code>curl -fsSL https://get.subcor.ai/install.sh | sh</code>
+            <button type="button">Copy</button>
+          </div>
+          <p class="note">
+            Installs to <code class="inline">~/.subcor/bin</code> on macOS and Linux (amd64/arm64) — no sudo required.
+          </p>
+        </div>
+
+        <div class="pane" data-pane="brew">
+          <div class="cmd">
+            <span class="prompt">$</span>
+            <code>brew install subcor-ai/tap/subcor</code>
+            <button type="button">Copy</button>
+          </div>
+          <p class="note">
+            macOS only. Upgrade with <code class="inline">brew upgrade subcor</code>, remove with <code class="inline">brew uninstall subcor</code>.
+          </p>
+        </div>
+      </div>
 
       <p class="meta">
         For more details and options: <a href="https://github.com/subcor-ai/get.subcor.ai">https://github.com/subcor-ai/get.subcor.ai</a>
@@ -101,15 +145,19 @@
     </main>
 
     <script>
-      const btn = document.getElementById("copy");
-      btn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(document.getElementById("cmd").textContent);
-          btn.textContent = "Copied";
-          setTimeout(() => (btn.textContent = "Copy"), 1500);
-        } catch {
-          btn.textContent = "Copy failed";
-        }
+      // One copy button per command block (tabs each have their own).
+      document.querySelectorAll(".cmd").forEach((cmd) => {
+        const btn = cmd.querySelector("button");
+        const code = cmd.querySelector("code");
+        btn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(code.textContent);
+            btn.textContent = "Copied";
+            setTimeout(() => (btn.textContent = "Copy"), 1500);
+          } catch {
+            btn.textContent = "Copy failed";
+          }
+        });
       });
     </script>
   </body>

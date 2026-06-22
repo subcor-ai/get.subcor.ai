@@ -39,6 +39,23 @@ rm -rf ~/.subcor
 …and remove the `# subcor (managed)` block from your shell profile
 (`~/.zshrc`, `~/.bashrc`/`~/.bash_profile`, or `~/.config/fish/config.fish`).
 
+## Install with Homebrew (macOS)
+
+```sh
+brew install subcor-ai/tap/subcor
+```
+
+Or in two steps:
+
+```sh
+brew tap subcor-ai/tap
+brew install subcor
+```
+
+Upgrade with `brew upgrade subcor`; remove with `brew uninstall subcor`. Homebrew
+installs are macOS only — on Linux, use the installer above. This pulls the same
+binary as the installer, from the [tap](https://github.com/subcor-ai/homebrew-tap).
+
 ## Manual installation
 
 Each release is a single self-contained executable — if you'd rather not run the
