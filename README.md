@@ -2,7 +2,8 @@
 
 This is the official distribution channel for the Subcor CLI binaries. This
 repository hosts both the Subcor CLI installer script and the released CLI
-binaries.
+binaries. It is also the home of the [gateway container
+image](#gateway-container-image).
 
 ## Install using Installer (recommended)
 
@@ -81,13 +82,30 @@ shasum -a 256 -c checksums.txt --ignore-missing
 Asset names are `subcor_<os>_<arch>.tar.gz` (`os`: `darwin`, `linux`; `arch`:
 `amd64`, `arm64`). On Linux, use `sha256sum -c` in place of `shasum -a 256 -c`.
 
+## Gateway container image
+
+The Subcor gateway — the component that runs next to your data source and
+feeds live data into Subcor — is published from here as a public container
+image:
+
+```sh
+docker pull ghcr.io/subcor-ai/gateway:latest
+```
+
+Images are built for Linux `amd64` and `arm64` (it runs natively on Apple
+silicon). `:latest` follows the newest release; pin a specific version, e.g.
+`ghcr.io/subcor-ai/gateway:0.1.0`, for anything you leave running. See the
+[gateway documentation](https://docs.subcor.ai/gateway) for configuration and
+how to run it.
+
 ## What's here
 
 - `install.sh` — the installer (served at `https://get.subcor.ai/install.sh`).
 - `index.html` — landing page.
 - Releases — CLI binaries (`subcor_<os>_<arch>.tar.gz`) and `checksums.txt`,
   published automatically from the Subcor build pipeline.
+- The gateway container image package, `ghcr.io/subcor-ai/gateway`.
 
-The binaries are compiled from a private source repository; only the artifacts
-are public. The installer is open for inspection — issues and PRs against
-`install.sh` are welcome.
+The binaries and the gateway image are compiled from a private source
+repository; only the artifacts are public. The installer is open for
+inspection — issues and PRs against `install.sh` are welcome.
