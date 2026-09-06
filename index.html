@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Install the Subcor CLI</title>
     <meta name="description" content="Install the Subcor command-line interface." />
-    <!-- Theme-aware favicon mark, reused from the console: light-scheme mark on
-         light backgrounds, dark-scheme mark on dark. -->
-    <link rel="icon" href="/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
-    <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+    <!-- The mark reads on light and dark alike, so one SVG serves every scheme;
+         the .ico is the fallback for browsers without SVG favicons, and the
+         touch icon is what iOS and Safari pick up. -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <style>
       :root {
         color-scheme: dark;
